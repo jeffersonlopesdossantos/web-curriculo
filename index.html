@@ -395,7 +395,7 @@
           </div>
 
           <div class="col-lg-8">
-            <form id="whatsapp-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form onsubmit="sendToWhatsApp(event)" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
                 <div class="row gy-4">
         
                     <div class="col-md-6">
@@ -415,34 +415,34 @@
                     </div>
         
                     <div class="col-md-12 text-center">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-        
                         <button type="submit">Enviar mensagem</button>
                     </div>
         
                 </div>
             </form>
-        </div>
+        </div><!-- End Contact Form -->
         
         <script>
-        document.getElementById("whatsapp-form").addEventListener("submit", function(event) {
-            event.preventDefault();
+            function sendToWhatsApp(event) {
+                event.preventDefault(); // Impede o envio tradicional do formulário
         
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var subject = document.getElementById("subject").value;
-            var message = document.getElementById("message").value;
+                let name = document.getElementById("name").value;
+                let email = document.getElementById("email").value;
+                let subject = document.getElementById("subject").value;
+                let message = document.getElementById("message").value;
         
-            var whatsappNumber = "24981453831";
-            var whatsappMessage = `Olá! Meu nome é ${name}.%0AEmail: ${email}%0AAssunto: ${subject}%0AMensagem: ${message}`;
+                let phoneNumber = "24981453831"; // Seu número de WhatsApp
         
-            var whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                // Criando a mensagem formatada e codificando para URL
+                let text = `Olá, meu nome é ${name}!\nEmail: ${email}\nAssunto: ${subject}\nMensagem: ${message}`;
+                let encodedText = encodeURIComponent(text); // Codifica caracteres especiais
         
-            window.open(whatsappUrl, "_blank");
-        });
+                let whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+        
+                window.open(whatsappUrl, "_blank"); // Abre o WhatsApp em uma nova aba
+            }
         </script>
+        
 
         </div>
 
